@@ -2,10 +2,14 @@
 require_once('Config/Config.php');
 require_once(SITE_ROOT.DS.'autoload.php');
 use Core\Usuario;
+use Core\DisciplinaResponsavel;
 use Classes\ValidarCampos;
 session_start();
 try{    
     Usuario::verificarPermissoes(array('Professor'));  // apenas professores tem acesso a essa pagina   
+    $turmas = new DisciplinaResponsavel();
+    $turmas->setCodUsuario($_SESSION['id_user']);
+    $dadosTurma = $turmas->getTurmas();
 ?>     
     <!DOCTYPE html>
     <html lang=pt-br>
@@ -43,11 +47,13 @@ try{
             <section class="turmas">
                 <h1>Suas turmas</h1>
                 <div>
-                    <a href="#">INI</a>
-                    <a href="#">INI</a>
-                    <a href="#">INI</a>
-                    <a href="#">INI</a>
-                    <a href="#">INI</a>
+                    <?php
+                        $contador = 0;
+                        while($contador < count($dadosTurma)){
+                            echo '<a href="sala.php?ID='.$dadosTurma[$contador]['cod_turma'].'">'.$dadosTurma[$contador]['descricao_turma'].'</a>';
+                            $contador++;
+                        }
+                    ?>                    
                 </div>
             </section>
         </div>
