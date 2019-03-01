@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+}
+
+
+body{
+    
+}
+
+#container{
+    margin: 0 auto;
+    max-width:1366px ;
+}
+.container-login{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    background-color: #6f1f41;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container-login .login{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(255, 255, 255,.8);
+    height: 290px;
+    width: 300px;
+    
+    border-radius: 10px;
+}
+
+
+.container-login .login div{
+    margin: 10px 0
+    
+}
+
+.container-login .login div label{
+    display: block;
+    
+}
+
+.container-login .login div input{
+    outline: none;
+    border:2px solid grey;
+    font-size: 16px;
+    padding:2px 10px
+    
+}
+
+
+.container-login .login input[type=submit]{
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    padding: 10px 55px;
+    width: 100%;
+    background-color: #0093d7;
+    color: white;
+    font-weight: bold;
+}
+
+.error-mensagem{
+    background-color: red;;
+    padding: 5px 0;
+    text-align: center;
+    color: white;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: #6f1f41;
+    height: 60px;
+    align-items: center;
+    color:white
+}
+
+
+header p{
+    margin-left: 20px
+}
+
+header a{
+    margin-right: 20px;
+    color:black;
+    background-color: white;
+    padding: 10px 17px;
+    border-radius: 100%/700px
+    
+}
+
+section.turmas{
+    background-color: #8f2a54;
+    height: 100vh;
+}
+
+
+section.turmas h1{
+    color: #fff;
+    text-align: center;
+    padding: 15px 0
+}
+
+section.turmas h1 + div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+section.turmas h1 + div a{ 
+    background-color: white;
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    margin: 10px;
+    font-size: 20px;
+    border-radius: 5px
+}
+
+section.alunos{
+    
+    height: 100vh;
+}
+
+section.alunos h1{
+    text-align: center;
+    padding: 15px 0 0 0
+}
+
+section.alunos p{
+    font-size: 14px;
+    text-align: center;
+    padding: 0 0 15px 0
+}
+
+table{
+    background-color: antiquewhite;
+    width: 100%;
+}
+
+table tr{
+    background-color: #8f2a54;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    color: white;
+}
+
+table tr td:nth-child(1){
+    width: 30px;
+    
+}
+
+table tr td:nth-child(2){
+    max-width: 70vw;
+    
+}
+
+table tr td:nth-child(3){
+    max-width: 10vw;
+    
+}
+
+tr:nth-child(even){
+    background-color: #bb3a70;
+    width: 100%;
+}
+
+
+table thead tr{
+    background-color: #6f1f41;
+    width: 100%;
+    height: 50px;
+}
+
+table tr td p{
+    line-height: 40px;
+    height: 40px;
+    font-size: 16px !important;
+    max-width: 70vw;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 auto;
+    
+    
+}
+
+table tr td:last-child p{
+    
+    font-size: 13px !important;
+    
+    max-width: 90%
+    
+}
+
+.modal{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+}
+
+.fundo-modal{
+    position: absolute;
+    width: 100%;
+    background-color: rgba(000, 000, 000,.8);
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+
+.fundo-modal + div{
+    position: absolute;
+    background-color: white;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50% )  translateY(-50% );
+}
+
+.fundo-modal + div form{
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    flex-wrap: wrap
+}
+
+
+.nota-input{
+    padding: 10px 30px;
+    
+}
+
+.nota-input label{
+    display: block;
+    margin: 3px
+}
+
+
+.nota-input input{
+    font-size: 16px;
+    width: 50px;
+    padding: 4px;
+    outline: none;
+    border: 1px solid black
+}
+
+.tabs{
+   
+    width: 100%;
+    position: relative;
+    bottom: 20px;
+    display: flex;
+    
+}
+
+.tabs a{
+    display: inline-block;
+    background-color: white;
+    height: 50px;
+    
+    line-height: 50px;
+    border-radius: 10px 10px 0 0;
+
+    text-align: center;
+}
+
+.tabs a.tab-ativo{
+    background-color: rgb(214, 212, 212);
+    
+}
+
+.tabs a.bi{
+    width: calc(100%/ 4);
+}
+
+.tabs a.tri{
+    width: calc(100%/ 3);
+}
+
+.tabs a.semes{
+    width: calc(100%/ 2);
+}
