@@ -1,0 +1,5 @@
+@media only screen and (max-width: 527px){
+    .nota-table{
+        display: none
+    }
+}

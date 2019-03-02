@@ -26,3 +26,7 @@ table thead tr{
 table thead tr th:last-child{
     padding: 0 7px
 }
+
+.nota-table{
+    display: none
+}
