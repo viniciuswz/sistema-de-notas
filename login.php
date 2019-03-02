@@ -1,22 +1,22 @@
 <?php
-require_once('Config/Config.php');
-require_once(SITE_ROOT.DS.'autoload.php');
-use Core\Usuario;
-use Classes\ValidarCampos;
-session_start();
-try{    
-    Usuario::verificarLogin(0);  // Não pode estar logado    
-?>        
-    <!DOCTYPE html>
+    require_once('Config/Config.php');
+    require_once(SITE_ROOT.DS.'autoload.php');
+    use Core\Usuario;
+    use Classes\ValidarCampos;
+    session_start();
+    try{    
+        Usuario::verificarLogin(0);  // Não pode estar logado    
+?>   
+<!DOCTYPE html>
     <html lang=pt-br>
     <head>
         
         <title>Nossa nota</title>
         <meta charset=UTF-8> <!-- ISO-8859-1 -->
         <meta name=viewport content="width=device-width, initial-scale=1.0">
-        <meta name=description content="Academia dos corno">
-        <meta name=keywords content="Reclamação, Barueri"> <!-- Opcional -->
-        <meta name=author content='equipe 4 INI3A'>
+        <meta name=description content="sistema de notas para professores">
+        <meta name=keywords content="notas"> <!-- Opcional -->
+        <meta name=author content='Daniel52x e Viniciuswz'>
         
         <!-- favicon, arquivo de imagem podendo ser 8x8 - 16x16 - 32x32px com extensão .ico -->
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
@@ -38,14 +38,14 @@ try{
         
         
             <section class="container-login">
-                <div class="login">            
+                <div class="login">               
                 
                 
-                    <form id='login' method="post" action="Logar.php"> 
+                    <form id='login' method="POST" action="Logar.php"> 
                             <h1>Login</h1>  
                         <div>
-                            <label for="RM">CPF</label>
-                            <input type="text" name="cpf" id="cpf" placeholder="Digite seu CPF">
+                            <label for="cpf">CPF</label>
+                            <input type="text" name="cpf" id="cpf" placeholder="Digite seu cpf">
                         </div>
                         <div>
                             <label for="senha">Senha</label>
@@ -61,12 +61,7 @@ try{
     </body>
     </html>
 <?php    
-}catch (Exception $exc){    
-    echo $exc->getMessage();
-}
-    
-   
-
-
-
-
+    }catch (Exception $exc){    
+        echo $exc->getMessage();
+    }
+        

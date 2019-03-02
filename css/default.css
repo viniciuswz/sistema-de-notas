@@ -162,6 +162,10 @@ table tr{
     color: white;
 }
 
+table tbody tr{
+    cursor: pointer;
+}
+
 table tr td:nth-child(1){
     width: 30px;
     
@@ -211,16 +215,24 @@ table tr td:last-child p{
 }
 
 .modal{
+   
+    display: none;
     position: fixed;
     width: 100%;
     top: 0;
     bottom: 0;
+   
+    
+}
+
+.modal.modal-ativo{
+    display: block;
 }
 
 .fundo-modal{
     position: absolute;
     width: 100%;
-    background-color: rgba(000, 000, 000,.8);
+    background-color: rgba(0, 0, 0, .8);
     top: 0;
     bottom: 0;
     display: flex;
@@ -237,58 +249,82 @@ table tr td:last-child p{
     top: 50%;
     left: 50%;
     transform: translateX(-50% )  translateY(-50% );
+    border-radius:  10px 10px
 }
 
 .fundo-modal + div form{
     display: flex;
     justify-content: center;
     width: 300px;
-    flex-wrap: wrap
+    flex-wrap: wrap;
 }
-
 
 .nota-input{
     padding: 10px 30px;
-    
+    margin: 0 auto
 }
 
 .nota-input label{
     display: block;
-    margin: 3px
+    text-align: center
 }
-
 
 .nota-input input{
     font-size: 16px;
     width: 50px;
     padding: 4px;
     outline: none;
-    border: 1px solid black
+    border: 1px solid black;
+    text-align: center
+}
+
+.modal input[type=submit]{
+    width: 170px;
+    height: 40px;
+    background-color: purple;
+    border: 0;
+    color: white;
+    font-weight: bold;
+    cursor: pointer
+}
+
+.modal form + p{
+    margin: 0 auto;
+    color: black;
+    text-align: center;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+
+.modal span strong{
+    display: block;
+  
 }
 
 .tabs{
-   
     width: 100%;
     position: relative;
     bottom: 20px;
     display: flex;
-    
 }
 
 .tabs a{
     display: inline-block;
     background-color: white;
     height: 50px;
-    
     line-height: 50px;
     border-radius: 10px 10px 0 0;
-
     text-align: center;
+    color:black;
 }
 
 .tabs a.tab-ativo{
     background-color: rgb(214, 212, 212);
-    
+    font-weight: bold;
+    color: rgb(63, 63, 63)
 }
 
 .tabs a.bi{
@@ -302,3 +338,5 @@ table tr td:last-child p{
 .tabs a.semes{
     width: calc(100%/ 2);
 }
+
+

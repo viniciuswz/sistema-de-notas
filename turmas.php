@@ -1,26 +1,26 @@
 <?php
-require_once('Config/Config.php');
-require_once(SITE_ROOT.DS.'autoload.php');
-use Core\Usuario;
-use Core\DisciplinaResponsavel;
-use Classes\ValidarCampos;
-session_start();
-try{    
-    Usuario::verificarPermissoes(array('Professor'));  // apenas professores tem acesso a essa pagina   
-    $turmas = new DisciplinaResponsavel();
-    $turmas->setCodUsuario($_SESSION['id_user']);
-    $dadosTurma = $turmas->getTurmas();
-?>     
-    <!DOCTYPE html>
+    require_once('Config/Config.php');
+    require_once(SITE_ROOT.DS.'autoload.php');
+    use Core\Usuario;
+    use Core\DisciplinaResponsavel;
+    use Classes\ValidarCampos;
+    session_start();
+    try{    
+        Usuario::verificarPermissoes(array('Professor'));  // apenas professores tem acesso a essa pagina   
+        $turmas = new DisciplinaResponsavel();
+        $turmas->setCodUsuario($_SESSION['id_user']);
+        $dadosTurma = $turmas->getTurmas();
+?>   
+<!DOCTYPE html>
     <html lang=pt-br>
     <head>
         
         <title>Nossa nota</title>
         <meta charset=UTF-8> <!-- ISO-8859-1 -->
         <meta name=viewport content="width=device-width, initial-scale=1.0">
-        <meta name=description content="Academia dos corno">
-        <meta name=keywords content="Reclamação, Barueri"> <!-- Opcional -->
-        <meta name=author content='equipe 4 INI3A'>
+        <meta name=description content="sistema de notas para professores">
+        <meta name=keywords content="notas"> <!-- Opcional -->
+        <meta name=author content='Daniel52x e Viniciuswz'>
         
         <!-- favicon, arquivo de imagem podendo ser 8x8 - 16x16 - 32x32px com extensão .ico -->
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
@@ -53,7 +53,7 @@ try{
                             echo '<a href="sala.php?ID='.$dadosTurma[$contador]['cod_turma'].'">'.$dadosTurma[$contador]['descricao_turma'].'</a>';
                             $contador++;
                         }
-                    ?>                    
+                    ?>     
                 </div>
             </section>
         </div>
@@ -62,6 +62,6 @@ try{
     </body>
     </html>
 <?php    
-}catch (Exception $exc){    
-    echo $exc->getMessage();
-}
+    }catch (Exception $exc){    
+        echo $exc->getMessage();
+    }
