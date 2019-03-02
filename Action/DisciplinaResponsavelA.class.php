@@ -3,11 +3,13 @@ namespace Action;
 use Model\DisciplinaResponsavelM;
 class DisciplinaResponsavelA extends DisciplinaResponsavelM{    
 
-    private $sqlGetDisciplinas = "SELECT DR.cod_disciplina_responsavel, DR.cod_disciplina, descricao_turma, T.cod_turma FROM disciplina_responsavel as DR
+    private $sqlGetDisciplinas = "SELECT DR.cod_disciplina_responsavel, DR.cod_disciplina, descricao_turma, T.cod_turma, descricao_disciplina FROM disciplina_responsavel as DR
                                     INNER JOIN turma_disciplina AS TD ON (DR.cod_disciplina_responsavel = TD.cod_disciplina_responsavel)
                                     INNER JOIN turma AS T ON (TD.cod_turma = T.cod_turma)
+                                    INNER JOIN disciplina AS A ON (DR.cod_disciplina = A.cod_disciplina)
                                     WHERE DR.cod_usuario = '%s' AND status_disciplina_responsavel = 'A' 
-                                    AND TD.status_disciplina = 'A' AND T.status_turma = 'A'";
+                                    AND TD.status_disciplina = 'A' AND T.status_turma = 'A'
+                                    ORDER BY descricao_disciplina";
 
     private $sqlGetQtdDisciplinasRespon = "SELECT COUNT(*) FROM disciplina_responsavel WHERE cod_usuario = '%s'";
 
@@ -37,4 +39,5 @@ class DisciplinaResponsavelA extends DisciplinaResponsavelM{
         }
         return $res;
     }
+   
 }
