@@ -182,13 +182,17 @@ table tr td:nth-child(1){
 }
 
 table tr td:nth-child(2){
-    max-width: 70vw;
+    max-width: 10vw;
     
 }
 
-table tr td:nth-child(3){
-    max-width: 10vw;
-    
+table tr td:last-child{
+    width:9vw;
+}
+
+.nota-table{
+    width:9vw;
+   
 }
 
 tr:nth-child(even){

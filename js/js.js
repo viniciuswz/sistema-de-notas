@@ -15,14 +15,12 @@ jQuery(function(){
   $(".nota-input input").keyup(function(){
     $("#media").text(calcular.apply(calcular,pegarValForm()));
     //addValorNotas.apply(addValorNotas,[1,2,3,4])
-
   })
 
   $('#lancar-nota').submit(function(){
     lancaNota.apply(lancaNota,pegarValForm());
-    alert('jaca')
+    //alert('jaca')
   })
-
   
 })
 
@@ -39,6 +37,10 @@ function pegarValForm(){
 function calcular(nota1,nota2,nota3,nota4){
   
   return (Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4)) / 4;
+}
+
+function colocarMediaNaTable(id,tipo,calc){
+  $("tr[data-id="+id+"] td:nth-child("+(2 + tipo)+")").text(calc)
 }
 
 function addValorNotas(nota1,nota2,nota3,nota4){
@@ -76,6 +78,7 @@ function lancaNotaAjax(nota1,nota2,nota3,nota4,tipo,id){
       success:function(result){
         alert(result);
         calcular.apply(calcular,pegarValForm());
+        colocarMediaNaTable(id,tipo,calcular.apply(calcular,pegarValForm()))
       }
    });
    return false
