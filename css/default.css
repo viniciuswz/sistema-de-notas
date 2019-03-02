@@ -52,11 +52,26 @@ body{
     
 }
 
+.container-login .login div label span{
+    font-size:13px;
+    color:red;
+    font-weight:bold;
+    margin-left:5px
+}
+
 .container-login .login div input{
     outline: none;
     border:2px solid grey;
     font-size: 16px;
     padding:2px 10px
+    
+}
+
+.container-login .login div input.errado{
+  
+    border:2px solid rgb(247, 0, 0);
+    background-color: rgba(255, 0, 0,.03)
+   
     
 }
 
