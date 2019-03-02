@@ -11,20 +11,20 @@ class MatriculaA extends MatriculaM{
                             WHERE M.turma_cod_turma = '%s' 
                             ORDER BY nome_aluno ASC";
 
-    public function getDadosAlunos(){ //  pegar dados dos alunos de uma turma
+    public function getDadosAlunos($codigoDisciplina){ //  pegar dados dos alunos de uma turma
         $sql = sprintf(
             $this->sqlAlunosMatricula,
             $this->getCodTurma()
         );
 
-        $resul = $this->tratarDados($this->runSelect($sql));        
+        $resul = $this->tratarDados($this->runSelect($sql), $codigoDisciplina);        
         if(empty($resul)){            
             return "Não há nenhum aluno matriculado nesta turma";
         }      
         return $resul;
     }
 
-    public function tratarDados($dados){ // tratar dados dos alunos
+    public function tratarDados($dados, $codigoDisciplina){ // tratar dados dos alunos
         if(empty($dados)){
             throw new \Exception("Não há nenhum aluno matriculado nesta turma", 60);
             
@@ -35,7 +35,7 @@ class MatriculaA extends MatriculaM{
             $dados[$contador]['numeroChamada'] = $contador2;
             if($dados[$contador]['status_matricula'] == "A"){
                 $dados[$contador]['status_matricula'] = "Matriculado";
-                $dados[$contador]['notas'] = $this->getMediaAluno($dados[$contador]['cod_matricula'], $numPeriodo);
+                $dados[$contador]['notas'] = $this->getMediaAluno($dados[$contador]['cod_matricula'], $numPeriodo, $codigoDisciplina);
             }else{
                 $dados[$contador]['status_matricula'] = "Transferido";
                 $dados[$contador]['notas'] = null;
@@ -46,10 +46,10 @@ class MatriculaA extends MatriculaM{
         return $dados;
     }
 
-    public function getMediaAluno($cod, $numPeriodo){
+    public function getMediaAluno($cod, $numPeriodo, $codigoDisciplina){
         $aluno = new Notas();
         $aluno->setCodMatricula($cod);
-        return $aluno->mediaAluno($numPeriodo);
+        return $aluno->mediaAluno($numPeriodo, $codigoDisciplina);
     }
 
     public function getPeriodo($cod){

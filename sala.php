@@ -18,7 +18,7 @@
 
         $matricula = new Matricula();
         $matricula->setCodTurma($_GET['ID']);        
-        $dadosMatriculas = $matricula->getDadosAlunos();      
+        $dadosMatriculas = $matricula->getDadosAlunos($_GET['CodDis']);      
         
         $turma = new Turma();
         $turma->setCodTurma($_GET['ID']);
