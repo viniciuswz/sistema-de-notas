@@ -9,6 +9,7 @@ class UsuarioA extends UsuarioM{
                             FROM usuario as U INNER JOIN tipo_usuario as T
                             ON (u.cod_tipo_usuario = T.cod_tipo_usuario) WHERE
                             cpf_usuario = '%s' AND status_tipo_usuario = 'A'";
+    private $sqlGetDadosUser = "SELECT nome_usuario, foto_usuario_perfil, cod_tipo_usuario FROM usuario WHERE cod_usuario = '%s'";
 
     public function verificarExistenCPF(){ // verificar se existe o cpf no banco
         $sql = sprintf(
@@ -43,6 +44,14 @@ class UsuarioA extends UsuarioM{
         return;
     }
 
+    public function getDadosUser(){ // pegar informações sobre o usuario
+        $sql = sprintf(
+            $this->sqlGetDadosUser,
+            $_SESSION['id_user']
+        );
+        $resul = $this->runSelect($sql);
+        return $resul;
+    }
 
     
 

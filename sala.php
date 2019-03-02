@@ -1,3 +1,31 @@
+<?php
+    require_once('Config/Config.php');
+    require_once(SITE_ROOT.DS.'autoload.php');
+    use Core\Usuario;
+    use Core\Matricula;
+    use Core\Turma;
+    use Classes\ValidarCampos;
+    session_start();
+    try{    
+        Usuario::verificarPermissoes(array('Professor'));  // apenas professores tem acesso a essa pagina   
+
+        $nomesCampos = array('ID');// Nomes dos campos que receberei da URL    
+        $validar = new ValidarCampos($nomesCampos, $_GET);
+        $validar->verificarTipoInt(array('ID','CodDis'),$_GET); // Verificar se é um numero
+
+        $usuario = new Usuario();
+        $dadosUsuario = $usuario->getDadosUser();  
+
+        $matricula = new Matricula();
+        $matricula->setCodTurma($_GET['ID']);        
+        $dadosMatriculas = $matricula->getDadosAlunos();    
+        
+        $turma = new Turma();
+        $turma->setCodTurma($_GET['ID']);
+        $dadosTurma = $turma->getTipoPeriodoTurma();
+        
+        
+?> 
 <!DOCTYPE html>
 <html lang=pt-br>
 <head>
@@ -28,11 +56,11 @@
 <body>
     <div id="container">
         <header>
-            <p>Olá <strong>Nome</strong> !</p>
+            <p>Olá, <strong><?php echo $dadosUsuario[0]['nome_usuario']?></strong> !</p>
             <a href="logout.php">logout</a>
         </header>
         <section class="alunos">
-            <h1>INI3AM</h1>
+            <h1><?php echo $dadosMatriculas[0]['descricao_turma']?>, Sala <?php echo $dadosMatriculas[0]['sala_turma']?></h1>
             <p>Clique em um nome para lançar a nota</p>
             <table border="0" cellpading="0" cellspacing="0">
                 <thead>
@@ -40,29 +68,31 @@
                     <tr>
                         <th>N°</th>
                         <th>Nome</th>
-                        <th class="nota-table">1° Tri</th>
-                        <th class="nota-table">1° Tri</th>
-                        <th class="nota-table">1° Tri</th>
-                        <th class="nota-table">1° Tri</th>
-                        <th>Status</th>
+                        
+                       
+                        <?php
+                            $contador2 = 1;
+                            while($contador2 <= $dadosTurma[0]['num_perido']){                                        
+                                    echo '<th class="nota-table">'.$contador2.$dadosTurma[0]['sigla_perido'].'</th>';                                       
+                                $contador2++;
+                            }
+                        ?>      
+                         <th>Status</th>                  
                     </tr>
                     
                 </thead>
-                <tbody>
-                    <tr data-id="1">
-                        <td>1</td>
-                        <td><p>Lorem ipsum consectetu elit Lorem ipsum consectetu elitLorem ipsum consectetu elitLorem ipsum consectetu elitLorem ipsum consectetu elitLorem ipsum consectetu elit</p></td>
-                        <td class="nota-table">1</td>
-                        <td class="nota-table">1</td>
-                        <td class="nota-table">1</td>
-                        <td class="nota-table">1</td>
-                        
-                        <td><p>transferido</p></td>
-                        
-                    </tr>
-                    
-                    
-                    
+                <tbody>                    
+                        <?php
+                            $contador = 0;
+                            while($contador < count($dadosMatriculas)){
+                                echo "<tr data-id={$dadosMatriculas[$contador]['cod_matricula']}>";
+                                echo "<td>{$dadosMatriculas[$contador]['numeroChamada']}</td>";
+                                echo "<td><p>{$dadosMatriculas[$contador]['nome_aluno']}</p></td>";
+                                echo "<td><p>{$dadosMatriculas[$contador]['status_matricula']}</p></td>";                                
+                                echo "</tr>";
+                                $contador++;
+                            }
+                        ?>   
                 </tbody>
             </table>
         </section>
@@ -74,10 +104,17 @@
         </div>
         <div>
             <div class="tabs">
-                <a href="#" data-tipo="1" class="tab-ativo">1°Bi</a>
-                <a href="#" data-tipo="2" class="">2°Bi</a>
-                <a href="#" data-tipo="3" class="">3°Bi</a>
-                <a href="#" data-tipo="4" class="">4°Bi</a>
+                <?php
+                    $contador = 1;
+                    while($contador <= $dadosTurma[0]['num_perido']){
+                        if($contador == 1){
+                            echo '<a href="#" data-tipo="'.$contador.'" class="tab-ativo">'.$contador.$dadosTurma[0]['sigla_perido'].'</a>';
+                        }else{
+                            echo '<a href="#" data-tipo="'.$contador.'">'.$contador.$dadosTurma[0]['sigla_perido'].'</a>';
+                        }
+                        $contador++;
+                    }
+                ?>           
             </div>
         <h2 style="text-align:center"></h2>
             <form action="" id="lancar-nota">
@@ -101,9 +138,13 @@
                 <input type="hidden" id="id" name="id" value="0">
                 <input type="submit" value="enviar">
             </form>
-            <p><strong>Media final</strong><span id="media">-</span></p>
+            <p><strong>Média <?php echo $dadosTurma[0]['descricao_periodo']?></strong><span id="media">-</span></p>
         </div>
     </div>
     
 </body>
 </html>
+<?php    
+    }catch (Exception $exc){    
+        echo $exc->getMessage();
+    }

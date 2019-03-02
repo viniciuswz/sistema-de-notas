@@ -10,6 +10,8 @@
         $turmas = new DisciplinaResponsavel();
         $turmas->setCodUsuario($_SESSION['id_user']);
         $dadosTurma = $turmas->getTurmas();
+        $usuario = new Usuario();
+        $dadosUsuario = $usuario->getDadosUser();        
 ?>   
 <!DOCTYPE html>
     <html lang=pt-br>
@@ -41,18 +43,26 @@
     <body>
         <div id="container">
             <header>
-                <p>Olá <strong>Nome</strong> !</p>
+                <p>Olá, <strong><?php echo $dadosUsuario[0]['nome_usuario']?></strong> !</p>
                 <a href="logout.php">logout</a>
             </header>
             <section class="turmas">
                 <h1>Suas turmas</h1>
                 <div>
                     <?php
-                        $contador = 0;
-                        while($contador < count($dadosTurma)){
-                            echo '<a href="sala.php?ID='.$dadosTurma[$contador]['cod_turma'].'">'.$dadosTurma[$contador]['descricao_turma'].'</a>';
-                            $contador++;
-                        }
+                        if(count($dadosTurma) > 0){
+                            $contador = 0;                            
+                            $html = "";
+                            while($contador < count($dadosTurma)){   
+                                if($contador == 0){ // escrever nome matéria        
+                                    echo $nomeDisciplina = $dadosTurma[0]['descricao_disciplina'];
+                                }else if($nomeDisciplina != $dadosTurma[$contador]['descricao_disciplina']){        // escrever nome matéria                                                                 
+                                    echo $nomeDisciplina = $dadosTurma[$contador]['descricao_disciplina'];
+                                }                   
+                                echo '<a href="sala.php?ID='.$dadosTurma[$contador]['cod_turma'].'&CodDis='.$dadosTurma[$contador]['cod_disciplina'].'">'.$dadosTurma[$contador]['descricao_turma'].'</a>';
+                                $contador++;
+                            }
+                        }                       
                     ?>     
                 </div>
             </section>
