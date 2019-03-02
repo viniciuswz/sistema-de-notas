@@ -71,7 +71,7 @@
                         <?php
                             $contador2 = 1;
                             while($contador2 <= $dadosTurma[0]['num_perido']){                                        
-                                    echo '<th>'.$contador2.$dadosTurma[0]['sigla_perido'].'</th>';                                       
+                                    echo '<th class="nota-table">'.$contador2.$dadosTurma[0]['sigla_perido'].'</th>';                                       
                                 $contador2++;
                             }
                         ?>     
