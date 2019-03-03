@@ -16,6 +16,8 @@ try{
     
     if($_SESSION['tipo_usu'] == 'Professor'){ // se for professor
         echo "<script>javascript:window.location='turmas.php';</script>";
+    }else if($_SESSION['tipo_usu'] == 'Diretor'){
+        echo "<script>javascript:window.location='boletim.php';</script>";
     }
 }catch (Exception $exc){
     $erro = $exc->getCode();
