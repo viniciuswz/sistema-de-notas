@@ -65,8 +65,7 @@
                                         echo "<h3>{$dadosTurma[$contador]['descricao_disciplina']}</h3>";
                                         echo '<div>';
                                     }                                    
-                                    $nomeDisciplina[] = $dadosTurma[$contador]['descricao_disciplina'];
-                                    
+                                    $nomeDisciplina[] = $dadosTurma[$contador]['descricao_disciplina'];                                    
                                 }                                           
                                 echo '<a href="sala.php?ID='.$dadosTurma[$contador]['cod_turma'].'&CodDis='.$dadosTurma[$contador]['cod_disciplina'].'">'.$dadosTurma[$contador]['descricao_turma'].'</a>';
                                 $contador++;                                

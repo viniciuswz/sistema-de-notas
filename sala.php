@@ -19,17 +19,12 @@
 
         $matricula = new Matricula();
         $matricula->setCodTurma($_GET['ID']);        
-        $dadosMatriculas = $matricula->getDadosAlunos($_GET['CodDis']);      
+        $dadosMatriculas = $matricula->getDadosAlunos($_GET['CodDis']);  
         
         $turma = new Turma();
         $turma->setCodTurma($_GET['ID']);
-        $dadosTurma = $turma->getTipoPeriodoTurma();       
-        
-        // $atividade = new Atividade();
-        // $atividade->setCodTurmaAtividade($_GET['CodDis']);
-        // $atividade->setNumeroPeriodo('1');
-        // $dadosAtividade = $atividade->getAtividadesAluno(1);
-        
+        $dadosTurma = $turma->getTipoPeriodoTurma();      
+               
 ?> 
 <!DOCTYPE html>
 <html lang=pt-br>
@@ -89,13 +84,17 @@
                         <?php
                             $contador = 0;
                             while($contador < count($dadosMatriculas)){
-                                echo "<tr class='codMatricula' data-id={$dadosMatriculas[$contador]['cod_matricula']}>";
+                                echo "<tr class='codMatricula' data-id={$dadosMatriculas[$contador]['cod_matricula']} data-status='{$dadosMatriculas[$contador]['status_matricula']}'>";
                                 echo "<td>{$dadosMatriculas[$contador]['numeroChamada']}</td>";
                                 echo "<td><p>{$dadosMatriculas[$contador]['nome_aluno']}</p></td>";                                                                 
                                     $contador2 = 0;
-                                    while($contador2 < count($dadosMatriculas[$contador]['notas'])){
-                                        if($dadosMatriculas[$contador]['notas'][$contador2][0]['media'] == FALSE){
-                                            echo '<td>-</td>';
+                                    while($contador2 < count($dadosMatriculas[$contador]['notas'])){                                        
+                                        if($dadosMatriculas[$contador]['notas'] == false){
+                                            $contador3 = 0;
+                                            while($contador3 < $dadosMatriculas[$contador]['numPeriodo']){
+                                                echo '<td>-</td>';
+                                                $contador3++;
+                                            }                                            
                                         }else if($dadosMatriculas[$contador]['notas'][$contador2][0]['media'] < 6){
                                             $nota = number_format($dadosMatriculas[$contador]['notas'][$contador2][0]['media'], 2, '.', '');                                           
                                             echo "<td><p style='color:red'>{$nota}</p></td>";
@@ -106,7 +105,7 @@
                                         
                                         $contador2++;
                                     }            
-                                echo "<td><p>{$dadosMatriculas[$contador]['status_matricula']}</p></td>";                          
+                                echo "<td ><p>{$dadosMatriculas[$contador]['status_matricula']}</p></td>";                          
                                 echo "</tr>";
                                 $contador++;
                             }

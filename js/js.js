@@ -134,7 +134,7 @@ function lancaNotaAjax(nota1,nota2,nota3,nota4,tipo,id){
       '&notas=' + notas,     
       success:function(result){
         if(result == 1){
-          $('#lancar-nota input').css('border', '1px solid #006400');
+          $('#lancar-nota input').css('border', '5px solid #006400');
           //location.reload();
           //alert("alterado")
         }else{
@@ -157,15 +157,19 @@ jQuery(function(){
 
   $('table tbody tr').click(function(){
     var $this = $(this);
-    var codMatricula = $this.data('id');
-    var codDisci = $("#turma").val();
-    var periodo = $(".tab-ativo").data('tipo');    
-    $("#id").val(id);
-    $("#codMatricula").val(codMatricula);
-    $(".modal").find('h2').text($('.tab-ativo').text());
-    $('.modal').addClass('modal-ativo');    
-    colocarNotasAjax(codDisci,periodo,codMatricula);
-    
+    var status =  $(this).data('status');    
+    if(status == 'Transferido'){
+      alert("aluno transferido");
+    }else{      
+      var codMatricula = $this.data('id');
+      var codDisci = $("#turma").val();
+      var periodo = $(".tab-ativo").data('tipo');     
+      $("#id").val(id);
+      $("#codMatricula").val(codMatricula);
+      $(".modal").find('h2').text($('.tab-ativo').text());
+      $('.modal').addClass('modal-ativo');    
+      colocarNotasAjax(codDisci,periodo,codMatricula);
+    }    
     return false;
   })
 

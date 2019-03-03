@@ -38,7 +38,8 @@ class MatriculaA extends MatriculaM{
                 $dados[$contador]['notas'] = $this->getMediaAluno($dados[$contador]['cod_matricula'], $numPeriodo, $codigoDisciplina);
             }else{
                 $dados[$contador]['status_matricula'] = "Transferido";
-                $dados[$contador]['notas'] = null;
+                $dados[$contador]['notas'] = false;
+                $dados[$contador]['numPeriodo'] = $numPeriodo;
             }
             
             $contador2++;
