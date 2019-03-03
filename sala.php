@@ -156,7 +156,7 @@
                 <input type="hidden" id="codMatricula" name="codMatricula" value="">
                 <input type="hidden" id="periodo" name="periodo" value="<?php echo $dadosTurma[0]['sigla_perido']?>">
                 <input type="hidden" id="id" name="id" value="<?php echo $_GET['ID']?>">
-                <input type="submit" value="enviar">
+                <input type="submit" value="Salvar">
             </form>
             <p><strong>Média <?php echo $dadosTurma[0]['descricao_periodo']?></strong><span id="media">-</span></p>
         </div>

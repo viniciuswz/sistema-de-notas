@@ -53,14 +53,23 @@
                         if(count($dadosTurma) > 0){
                             $contador = 0;                            
                             $html = "";
-                            while($contador < count($dadosTurma)){   
-                                if($contador == 0){ // escrever nome matéria        
-                                    echo $nomeDisciplina = $dadosTurma[0]['descricao_disciplina'];
-                                }else if($nomeDisciplina != $dadosTurma[$contador]['descricao_disciplina']){        // escrever nome matéria                                                                 
-                                    echo $nomeDisciplina = $dadosTurma[$contador]['descricao_disciplina'];
-                                }                   
+                            $nomeDisciplina = array();
+                            $nomeDisciplina2 = "";
+                            while($contador < count($dadosTurma)){ 
+                                if(!in_array($dadosTurma[$contador]['descricao_disciplina'], $nomeDisciplina)){ 
+                                    if($contador == 0){
+                                        echo '<div>';
+                                        echo "<h3>{$dadosTurma[$contador]['descricao_disciplina']}</h3>";
+                                    }else{
+                                        echo '</div>';
+                                        echo "<h3>{$dadosTurma[$contador]['descricao_disciplina']}</h3>";
+                                        echo '<div>';
+                                    }                                    
+                                    $nomeDisciplina[] = $dadosTurma[$contador]['descricao_disciplina'];
+                                    
+                                }                                           
                                 echo '<a href="sala.php?ID='.$dadosTurma[$contador]['cod_turma'].'&CodDis='.$dadosTurma[$contador]['cod_disciplina'].'">'.$dadosTurma[$contador]['descricao_turma'].'</a>';
-                                $contador++;
+                                $contador++;                                
                             }
                         }                       
                     ?>     
