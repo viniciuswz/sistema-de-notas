@@ -18,9 +18,16 @@ jQuery(function(){
   })
 
   $(".nota-input input").keyup(function(){
-    $("#media").text(calcular.apply(calcular,pegarValForm()));
+    $media = calcular.apply(calcular,pegarValForm());
+    $media = parseFloat($media.toFixed(2));
+    if($media < 6){
+      $("#media").css("color", 'red')
+    }else{
+      $("#media").css("color", 'blue')
+    }
+    $("#media").text($media);    
     //addValorNotas.apply(addValorNotas,[1,2,3,4])
-  })
+  });  
 
   $('#lancar-nota').submit(function(){
     lancaNota.apply(lancaNota,pegarValForm());
@@ -28,6 +35,15 @@ jQuery(function(){
   })
   
 })
+
+function verificarNotaVazia(id){ 
+  $nota = $(id).val();  
+    if($nota != ""){
+      return $nota;
+    }
+  $(id).val('0');
+  return 0;
+}
 
 function pegarValForm(){
   var nota1 = $("#nota1").val();

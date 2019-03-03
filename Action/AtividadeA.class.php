@@ -7,7 +7,9 @@ class AtividadeA extends AtividadeM{
                                         %s                                       
                                         WHERE A.cod_turma_disciplina = '%s'
                                         AND numero_periodo = '%s'
-                                        %s";    
+                                        %s";  
+    private $sqlSelectQtdNotaAluno = "SELECT COUNT(*) FROM notas
+                                        " 
 
     public function getAtividadesAluno($codAluno, $numePeriodo){
         $sql = sprintf(
@@ -34,6 +36,10 @@ class AtividadeA extends AtividadeM{
             $resul = $this->runSelect($sql);
         }   
         return $resul;
+    }
+
+    public function AdcionarNotaAluno(){
+
     }
 
     
