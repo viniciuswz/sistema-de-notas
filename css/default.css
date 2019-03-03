@@ -174,12 +174,12 @@ section.alunos p{
     padding: 0 0 15px 0
 }
 
-table{
+.alunos table{
     background-color: antiquewhite;
     width: 100%;
 }
 
-table tr{
+.alunos table tr{
     background-color: #8f2a54;
     width: 100%;
     height: 40px;
@@ -187,21 +187,21 @@ table tr{
     color: white;
 }
 
-table tbody tr{
+.alunos table tbody tr{
     cursor: pointer;
 }
 
-table tr td:nth-child(1){
+.alunos table tr td:nth-child(1){
     width: 30px;
     
 }
 
-table tr td:nth-child(2){
+.alunos table tr td:nth-child(2){
     max-width: 10vw;
     
 }
 
-table tr td:last-child{
+.alunos table tr td:last-child{
     width:9vw;
 }
 
@@ -216,13 +216,13 @@ tr:nth-child(even){
 }
 
 
-table thead tr{
+.alunos table thead tr{
     background-color: #6f1f41;
     width: 100%;
     height: 50px;
 }
 
-table tr td p{
+.alunos table tr td p{
     line-height: 40px;
     height: 40px;
     font-size: 16px !important;
@@ -235,7 +235,7 @@ table tr td p{
     
 }
 
-table tr td:last-child p{
+.alunos table tr td:last-child p{
     
     font-size: 13px !important;
     
@@ -369,3 +369,58 @@ table tr td:last-child p{
 }
 
 
+.boletim{
+    display: flex;
+    flex-direction: column;
+}
+
+.boletim .info{
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    padding: 7px 0;
+   
+}
+
+.boletim .info p {
+padding-right:6px
+}
+
+.boletim .info p strong{
+    margin-right: 5px
+}
+
+.boletim .materia{
+    display: flex;
+    background-color: #bb3a70;
+    color: white
+}
+
+.materia:nth-child(odd){
+    background-color: #7a1e44;
+}
+
+
+.boletim .materia h3{
+    width: 60%;
+    word-wrap: break-word;
+    font-size: 16px;
+    text-align: center;
+  
+}
+
+
+.boletim .materia div{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+    
+   
+}
+
+.boletim .materia div span{
+   
+}

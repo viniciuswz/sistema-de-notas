@@ -30,3 +30,11 @@ table thead tr th:last-child{
 .nota-table{
     display: none
 }
+
+.boletim .info{
+ flex-direction: column;
+}
+
+.boletim .materia h3{
+    width: 200px;
+}
