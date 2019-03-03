@@ -3,7 +3,7 @@ namespace Action;
 use Model\DisciplinaResponsavelM;
 class DisciplinaResponsavelA extends DisciplinaResponsavelM{    
 
-    private $sqlGetDisciplinas = "SELECT DR.cod_disciplina_responsavel, DR.cod_disciplina, descricao_turma, T.cod_turma, descricao_disciplina FROM disciplina_responsavel as DR
+    private $sqlGetDisciplinas = "SELECT TD.cod_turma_disciplina,DR.cod_disciplina_responsavel, DR.cod_disciplina, descricao_turma, T.cod_turma, descricao_disciplina FROM disciplina_responsavel as DR
                                     INNER JOIN turma_disciplina AS TD ON (DR.cod_disciplina_responsavel = TD.cod_disciplina_responsavel)
                                     INNER JOIN turma AS T ON (TD.cod_turma = T.cod_turma)
                                     INNER JOIN disciplina AS A ON (DR.cod_disciplina = A.cod_disciplina)
@@ -35,7 +35,7 @@ class DisciplinaResponsavelA extends DisciplinaResponsavelM{
         );
         $res = $this->runSelect($sql);        
         if(empty($res)){
-            throw new \Exception("Ocorreu um erro, tente novamente", 50);
+            throw new \Exception("Você ainda não tem turmas para lecionar", 50);
         }
         return $res;
     }

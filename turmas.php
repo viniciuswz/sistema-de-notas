@@ -67,7 +67,7 @@
                                     }                                    
                                     $nomeDisciplina[] = $dadosTurma[$contador]['descricao_disciplina'];                                    
                                 }                                           
-                                echo '<a href="sala.php?ID='.$dadosTurma[$contador]['cod_turma'].'&CodDis='.$dadosTurma[$contador]['cod_disciplina'].'">'.$dadosTurma[$contador]['descricao_turma'].'</a>';
+                                echo '<a href="sala.php?ID='.$dadosTurma[$contador]['cod_turma'].'&CodDis='.$dadosTurma[$contador]['cod_turma_disciplina'].'">'.$dadosTurma[$contador]['descricao_turma'].'</a>';
                                 $contador++;                                
                             }
                         }                       
@@ -84,13 +84,13 @@
         $erro = $exc->getCode();
         switch ($erro) {
         case 6:
-            echo "<script>javascript:window.location='turmas.php';</script>";
+            echo "<script>javascript:window.location='login.php';</script>";
             break;     
         case 50:
             echo $exc->getMessage();
             break;
         default:
-            echo "<script>javascript:window.location='turmas.php';</script>";
+            echo "<script>javascript:window.location='login.php';</script>";
             break;
         }
     }
