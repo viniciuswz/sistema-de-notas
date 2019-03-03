@@ -21,10 +21,10 @@
                     okayInput.call(okayInput,$this); 
                 }    
                 if($this.value == '' && $this.type != 'submit'){
-                    redInput.call(redInput,$this);
+                    redInput.call(redInput,$this);                    
                 }
             })
-            if(okay){
+            if(okay){               
                 $.ajax({
                     url: '../Logar.php',
                     type: 'post',

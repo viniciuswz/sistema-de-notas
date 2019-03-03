@@ -4,6 +4,7 @@
     use Core\Usuario;
     use Core\Matricula;
     use Core\Turma;
+    use Core\Atividade;
     use Classes\ValidarCampos;
     session_start();
     try{    
@@ -22,8 +23,12 @@
         
         $turma = new Turma();
         $turma->setCodTurma($_GET['ID']);
-        $dadosTurma = $turma->getTipoPeriodoTurma();
+        $dadosTurma = $turma->getTipoPeriodoTurma();       
         
+        // $atividade = new Atividade();
+        // $atividade->setCodTurmaAtividade($_GET['CodDis']);
+        // $atividade->setNumeroPeriodo('1');
+        // $dadosAtividade = $atividade->getAtividadesAluno(1);
         
 ?> 
 <!DOCTYPE html>
@@ -51,10 +56,11 @@
     <!-- JS-->
     <script src="lib/_jquery/jquery.js"></script>
     <script src="js/js.js"></script>
+    <script src="js/form.js"></script>
     
 </head>
 <body>
-    <div id="container">
+    <div id="container">        
         <header>
             <p>Olá, <strong><?php echo $dadosUsuario[0]['nome_usuario']?></strong> !</p>
             <a href="logout.php">logout</a>
@@ -83,7 +89,7 @@
                         <?php
                             $contador = 0;
                             while($contador < count($dadosMatriculas)){
-                                echo "<tr data-id={$dadosMatriculas[$contador]['cod_matricula']}>";
+                                echo "<tr class='codMatricula' data-id={$dadosMatriculas[$contador]['cod_matricula']}>";
                                 echo "<td>{$dadosMatriculas[$contador]['numeroChamada']}</td>";
                                 echo "<td><p>{$dadosMatriculas[$contador]['nome_aluno']}</p></td>";                                                                 
                                     $contador2 = 0;
@@ -131,23 +137,25 @@
         <h2 style="text-align:center"></h2>
             <form action="" id="lancar-nota">
                 <div class="nota-input">
-                    <label for="nota1">Nota 1</label>
+                    <label for="nota1" id="txtNota1"></label>
                     <input type="number" id="nota1" name="nota1" min="0" max="10" step="0.1" maxlenght="3" required>
                 </div>
                 <div class="nota-input">
-                    <label for="nota2">Nota 2</label>
+                    <label for="nota2" id="txtNota2"></label>
                     <input type="number" id="nota2" name="nota2" min="0" max="10" step="0.1" maxlenght="3" required>
                 </div>
                 <div class="nota-input">
-                    <label for="nota3">Nota 3</label>
+                    <label for="nota3" id="txtNota3"></label>
                     <input type="number" id="nota3" name="nota3" min="0" max="10" step="0.1" maxlenght="3" required>
                 </div>
                 <div class="nota-input">
-                    <label for="nota4">Nota 4</label>
+                    <label for="nota4" id="txtNota4"></label>
                     <input type="number" id="nota4" name="nota4" min="0" max="10" step="0.1" maxlenght="3" required>
                 </div>
-                <input type="hidden" id="tipo" name="tipo" value="1">
-                <input type="hidden" id="id" name="id" value="0">
+                <input type="hidden" id="turma" name="tipo" value="<?php echo $_GET['CodDis']?>">
+                <input type="hidden" id="codMatricula" name="codMatricula" value="">
+                <input type="hidden" id="periodo" name="periodo" value="<?php echo $dadosTurma[0]['sigla_perido']?>">
+                <input type="hidden" id="id" name="id" value="<?php echo $_GET['ID']?>">
                 <input type="submit" value="enviar">
             </form>
             <p><strong>Média <?php echo $dadosTurma[0]['descricao_periodo']?></strong><span id="media">-</span></p>

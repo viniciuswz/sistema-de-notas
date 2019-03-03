@@ -8,7 +8,12 @@ jQuery(function(){
     $(".tabs").find('a.tab-ativo').removeClass('tab-ativo');
     $this.addClass('tab-ativo');
     $(".modal").find('h2').text($this.text());
-    colocarNotas(tipo,$("#id").val());
+
+    var codMatricula = $("#codMatricula").val();
+    var codDisci = $("#turma").val();
+    var periodo = $(".tab-ativo").data('tipo');  
+
+    colocarNotasAjax(codDisci,periodo,codMatricula);
     return false;
   })
 
@@ -33,9 +38,7 @@ function pegarValForm(){
   var id = $("#id").val();
   return [nota1,nota2,nota3,nota4,tipo,id];
 }
-
-function calcular(nota1,nota2,nota3,nota4){
-  
+function calcular(nota1,nota2,nota3,nota4){ 
   return (Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4)) / 4;
 }
 
@@ -50,19 +53,37 @@ function addValorNotas(nota1,nota2,nota3,nota4){
   $("#nota4").val(nota4);
 }
 
-function colocarNotasAjax(tipo,id){
+function colocarNotasAjax(codDisci,numPeriodo,codAluno){
   
   addValorNotas.apply(addValorNotas,['...','...','...','...']);
   jQuery(function(){
     
     $.ajax({
-      url: jaca,
+      url: 'GetNotasAluno.php',
       type: 'post',
-      data: 'tipo=' + tipo+ '&id=' + id,
+      data: 'CodDis=' + codDisci + "&numeroPeriodo=" + numPeriodo + "&codAluno=" + codAluno,
       success:function(result){
-         alert(result);
-        addValorNotas.apply(addValorNotas,result);
-        calcular();
+        $resul2 = JSON.parse(result);       
+        contador = 1;
+        for(i = 0; i < $resul2.length; i++){
+          $('#txtNota' + contador).text($resul2[i].nome_atividade);
+          if($resul2[i].nota){
+            $('#nota' + contador).val('0');          
+            $('#nota' + contador).val($resul2[i].nota);
+            $('#nota' + contador).attr('cod-Nota', $resul2[i].cod_nota);
+          }else{
+            $('#nota' + contador).val('0');
+          }          
+          contador++;
+        }       
+        $media = calcular($('#nota1').val(),$('#nota2').val(),$('#nota3').val(),$('#nota4').val());
+        $media = parseFloat($media.toFixed(2));
+        if($media < 6){
+          $("#media").css("color", 'red')
+        }else{
+          $("#media").css("color", 'blue')
+        }
+        $("#media").text($media);
       }
    });
   })
@@ -95,11 +116,16 @@ jQuery(function(){
 
   $('table tbody tr').click(function(){
     var $this = $(this);
-    var id = $this.data('id');
+    var codMatricula = $this.data('id');
+    var codDisci = $("#turma").val();
+    var periodo = $(".tab-ativo").data('tipo');    
     $("#id").val(id);
+    $("#codMatricula").val(codMatricula);
     $(".modal").find('h2').text($('.tab-ativo').text());
-    $('.modal').addClass('modal-ativo');
-    colocarNotasAjax(1,id);
+    $('.modal').addClass('modal-ativo');    
+    colocarNotasAjax(codDisci,periodo,codMatricula);
+    
+    return false;
   })
 
   $(document).on("change", "#fotoPerfil", qtdTabs())
