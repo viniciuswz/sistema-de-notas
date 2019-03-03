@@ -135,7 +135,7 @@
                 ?>           
             </div>
         <h2 style="text-align:center"></h2>
-            <form action="" id="lancar-nota">
+            <form id="lancar-nota">
                 <div class="nota-input">
                     <label for="nota1" id="txtNota1"></label>
                     <input type="number" id="nota1" name="nota1" min="0" max="10" step="0.1" maxlenght="3" value="0" required>

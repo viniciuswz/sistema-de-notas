@@ -21,17 +21,22 @@ jQuery(function(){
     $media = calcular.apply(calcular,pegarValForm());
     $media = parseFloat($media.toFixed(2));
     if($media < 6){
-      $("#media").css("color", 'red')
+      $("#media").css("color", 'red');
+      $("#media").text($media);  
+    }else if($media > 6){
+      $("#media").css("color", 'blue');
+      $("#media").text($media);  
     }else{
-      $("#media").css("color", 'blue')
+      $("#media").css("color", 'red');
+      $("#media").text(0);
     }
-    $("#media").text($media);    
+      
     //addValorNotas.apply(addValorNotas,[1,2,3,4])
   });  
 
   $('#lancar-nota').submit(function(){
-    lancaNota.apply(lancaNota,pegarValForm());
-    //alert('jaca')
+    lancaNotaAjax.apply(lancaNotaAjax,pegarValForm(true)); 
+    return false;   
   })
   
 })
@@ -45,11 +50,19 @@ function verificarNotaVazia(id){
   return 0;
 }
 
-function pegarValForm(){
-  var nota1 = $("#nota1").val();
-  var nota2 = $("#nota2").val();
-  var nota3 = $("#nota3").val();
-  var nota4 = $("#nota4").val();
+function pegarValForm($indCodNota = false){
+  if($indCodNota){
+    var nota1 = $("#nota1").val() + '-' + $("#nota1").attr('cod-nota');
+    var nota2 = $("#nota2").val() + '-' + $("#nota2").attr('cod-nota');
+    var nota3 = $("#nota3").val() + '-' + $("#nota3").attr('cod-nota');
+    var nota4 = $("#nota4").val() + '-' + $("#nota4").attr('cod-nota');
+  }else{
+    var nota1 = $("#nota1").val();
+    var nota2 = $("#nota2").val();
+    var nota3 = $("#nota3").val();
+    var nota4 = $("#nota4").val();
+  }
+  
   var tipo = $("#tipo").val();
   var id = $("#id").val();
   return [nota1,nota2,nota3,nota4,tipo,id];
@@ -83,6 +96,7 @@ function colocarNotasAjax(codDisci,numPeriodo,codAluno){
         contador = 1;
         for(i = 0; i < $resul2.length; i++){
           $('#txtNota' + contador).text($resul2[i].nome_atividade);
+          $('#nota' + contador).attr('cod-Nota', $resul2[i].cod_atividade);
           if($resul2[i].nota){
             $('#nota' + contador).val('0');          
             $('#nota' + contador).val($resul2[i].nota);
@@ -100,6 +114,7 @@ function colocarNotasAjax(codDisci,numPeriodo,codAluno){
           $("#media").css("color", 'blue')
         }
         $("#media").text($media);
+        $("mediaTdTabela").text($media);
       }
    });
   })
@@ -108,14 +123,23 @@ function colocarNotasAjax(codDisci,numPeriodo,codAluno){
 
 function lancaNotaAjax(nota1,nota2,nota3,nota4,tipo,id){
   jQuery(function(){
+    var codMatricula = $("#codMatricula").val();
+    var codDisci = $("#turma").val();
+    var periodo = $(".tab-ativo").data('tipo');  
+    var notas = [nota1, nota2, nota3, nota4]
     $.ajax({
-      url: jaca,
+      url: 'AlterarNota.php',
       type: 'post',
-      data: 'nota1='+nota1+ '&nota2='+ nota2 +'&nota3='+ nota3 +'&nota4='+ nota4 +'&tipo='+tipo+'&id='+id,
+      data: 'codMatricula=' + codMatricula + '&CodDis=' + codDisci + '&periodo=' + periodo +
+      '&notas=' + notas,     
       success:function(result){
-        alert(result);
-        calcular.apply(calcular,pegarValForm());
-        colocarMediaNaTable(id,tipo,calcular.apply(calcular,pegarValForm()))
+        if(result == 1){
+          $('#lancar-nota input').css('border', '1px solid #006400');
+          //location.reload();
+          //alert("alterado")
+        }else{
+          alert("erro")
+        }       
       }
    });
    return false
@@ -127,7 +151,8 @@ function lancaNotaAjax(nota1,nota2,nota3,nota4,tipo,id){
 
 jQuery(function(){
   $('.fundo-modal').click(function(){
-    $('.modal').removeClass('modal-ativo');
+    $('.modal').removeClass('modal-ativo');    
+    location.reload();
   })
 
   $('table tbody tr').click(function(){

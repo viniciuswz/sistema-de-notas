@@ -7,14 +7,12 @@ class AtividadeA extends AtividadeM{
                                         %s                                       
                                         WHERE A.cod_turma_disciplina = '%s'
                                         AND numero_periodo = '%s'
-                                        %s";  
-    private $sqlSelectQtdNotaAluno = "SELECT COUNT(*) FROM notas
-                                        " 
+                                        %s";      
 
     public function getAtividadesAluno($codAluno, $numePeriodo){
         $sql = sprintf(
             $this->sqlSelectAtividades,
-            " nome_atividade, peso_atividade, nota, cod_nota ",
+            " nome_atividade, peso_atividade, nota, cod_nota, A.cod_atividade ",
             " INNER JOIN notas AS N ON (A.cod_atividade = N.cod_atividade) ",
             $this->getCodTurmaAtividade(),
             $numePeriodo,
@@ -27,7 +25,7 @@ class AtividadeA extends AtividadeM{
         if(empty($resul)){ // se nao existir notas quero q retorne apenas o nome das atividades
             $sql = sprintf(
                 $this->sqlSelectAtividades,
-                " nome_atividade ",
+                " nome_atividade, A.cod_atividade ",
                 " ",
                 $this->getCodTurmaAtividade(),
                 $numePeriodo,
@@ -36,12 +34,6 @@ class AtividadeA extends AtividadeM{
             $resul = $this->runSelect($sql);
         }   
         return $resul;
-    }
-
-    public function AdcionarNotaAluno(){
-
-    }
-
-    
+    }    
     
 }
