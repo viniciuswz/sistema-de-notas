@@ -17,8 +17,19 @@ try{
     if($_SESSION['tipo_usu'] == 'Professor'){ // se for professor
         echo "<script>javascript:window.location='turmas.php';</script>";
     }
-}catch (Exception $exc){    
-    echo $exc->getMessage();
+}catch (Exception $exc){
+    $erro = $exc->getCode();
+    switch ($erro) {
+    case 6:
+        echo "<script>javascript:window.location='turmas.php';</script>";
+        break;        
+    case 30:    
+        echo $exc->getMessage();
+        break;
+    default:
+        echo "<script>javascript:window.location='turmas.php';</script>";
+        break;
+    }
 }
     
    

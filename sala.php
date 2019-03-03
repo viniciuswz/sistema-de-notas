@@ -165,5 +165,17 @@
 </html>
 <?php    
     }catch (Exception $exc){    
+        $erro = $exc->getCode();
+    switch ($erro) {
+    case 6:
+        echo "<script>javascript:window.location='turmas.php';</script>";
+        break;         
+    case 40:
+    case 60:
         echo $exc->getMessage();
+        break;
+    default:
+        echo "<script>javascript:window.location='turmas.php';</script>";
+        break;
+    }
     }

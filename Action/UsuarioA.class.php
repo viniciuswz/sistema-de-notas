@@ -33,11 +33,11 @@ class UsuarioA extends UsuarioM{
         );
         $resul = $this->runSelect($sql);
         if(empty($resul)){ // Ocorreu um erro tente novamente
-            throw new \Exception("Ocorreu um erro, tente novamente!", 31);
+            throw new \Exception("Ocorreu um erro, tente novamente!", 30);
         }else if($resul[0]['status_usuario'] != 'A'){ // conta bloqueda
-            throw new \Exception("Sua conta foi bloqueada, entrem em contato conosco", 31);
+            throw new \Exception("Sua conta foi bloqueada, entrem em contato conosco", 30);
         }else if(!password_verify($this->getSenhaUsu(), $resul[0]['senha_usuario'])){ // Verifico se o hash é igual a senha digitada
-            throw new \Exception("Senha inválida",32); 
+            throw new \Exception("Senha inválida",30); 
         }
         $_SESSION['id_user'] = $resul[0]['cod_usuario'];
         $_SESSION['tipo_usu'] = $resul[0]['descricao_tipo_usuario'];

@@ -63,6 +63,14 @@
     </html>
 <?php    
     }catch (Exception $exc){    
-        echo $exc->getMessage();
+        $erro = $exc->getCode();  
+        switch ($erro) {
+            case 6: // ja esta logado
+                echo "<script>javascript:window.location='turmas.php';</script>";
+                break;            
+            default:
+                echo "<script>javascript:window.location='turmas.php';</script>";
+                break;
+        }
     }
         
