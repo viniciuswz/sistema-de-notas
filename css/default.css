@@ -119,24 +119,18 @@ header a:last-child{
 }
 
 header a:first-child{
-
     margin-right: 10px;
-    
     color:white;
-    
     font-weight:bold;
-    
     font-size:34px;
-    
-    /* margin-bottom:4px; */
-    
     position: relative;
-    
     bottom: 3px;
+    cursor: pointer;
     }
 
 section.turmas{
     background-color: #8f2a54;
+    min-height: calc(100vh - 60px);
    
 }
 

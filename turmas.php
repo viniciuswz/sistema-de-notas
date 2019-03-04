@@ -39,7 +39,7 @@
         
     </head>
     <body>
-        <div id="container">
+        <div id="container" >
             <header>
                 <p>Olá,&nbsp;<strong><?php echo $dadosUsuario[0]['nome_usuario']?></strong> !</p>
                 <a href="logout.php">logout</a>
