@@ -38,3 +38,7 @@ table thead tr th:last-child{
 .boletim .materia h3{
     width: 200px;
 }
+
+.mobile-hidden{
+    display:none;
+}
