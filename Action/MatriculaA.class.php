@@ -24,7 +24,7 @@ class MatriculaA extends MatriculaM{
         return $resul;
     }
 
-    public function tratarDados($dados, $codigoDisciplina){ // tratar dados dos alunos
+    public function tratarDados($dados, $codigoDisciplina, $indNota = true){ // tratar dados dos alunos
         if(empty($dados)){
             throw new \Exception("Não há nenhum aluno matriculado nesta turma", 60);
             
@@ -35,11 +35,15 @@ class MatriculaA extends MatriculaM{
             $dados[$contador]['numeroChamada'] = $contador2;
             if($dados[$contador]['status_matricula'] == "A"){
                 $dados[$contador]['status_matricula'] = "Matriculado";
-                $dados[$contador]['notas'] = $this->getMediaAluno($dados[$contador]['cod_matricula'], $numPeriodo, $codigoDisciplina);
+                if($indNota){ // so quero q calcule as notas em momentos especificos
+                    $dados[$contador]['notas'] = $this->getMediaAluno($dados[$contador]['cod_matricula'], $numPeriodo, $codigoDisciplina);
+                }                
             }else{
                 $dados[$contador]['status_matricula'] = "Transferido";
-                $dados[$contador]['notas'] = false;
-                $dados[$contador]['numPeriodo'] = $numPeriodo;
+                if($indNota){
+                    $dados[$contador]['notas'] = false;
+                    $dados[$contador]['numPeriodo'] = $numPeriodo;
+                }                
             }
             
             $contador2++;
@@ -47,16 +51,29 @@ class MatriculaA extends MatriculaM{
         return $dados;
     }
 
-    public function getMediaAluno($cod, $numPeriodo, $codigoDisciplina){
+    public function getMediaAluno($cod, $numPeriodo, $codigoDisciplina){ // calcular média do aluno
         $aluno = new Notas();
         $aluno->setCodMatricula($cod);
         return $aluno->mediaAluno($numPeriodo, $codigoDisciplina);
     }
 
-    public function getPeriodo($cod){
+    public function getPeriodo($cod){ // pegar quanto periodos tem a turma
         $periodo = new Turma();
         $periodo->setCodTurma($cod);
         $res = $periodo->getTipoPeriodoTurma();
         return $res[0]['num_perido'];
+    }
+
+    public function getAlunosBoletim(){
+        $sql = sprintf(
+            $this->sqlAlunosMatricula,
+            $this->getCodTurma()
+        );
+
+        $resul = $this->tratarDados($this->runSelect($sql), '', false);        
+        if(empty($resul)){            
+            return "Não há nenhum aluno matriculado nesta turma";
+        }      
+        return $resul;
     }
 }

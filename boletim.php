@@ -7,11 +7,16 @@
     session_start();
     try{    
         Usuario::verificarPermissoes(array('Diretor'));  // apenas diretores tem acesso a essa pagina
+        
+        $nomesCampos = array('codAluno');// Nomes dos campos que receberei da URL    
+        $validar = new ValidarCampos($nomesCampos, $_GET);
+        $validar->verificarTipoInt(array('codAluno'),$_GET); // Verificar se é um numero
+
         $usuario = new Usuario();
         $dadosUsuario = $usuario->getDadosUser(); 
         
         $boletim = new Boletim();
-        $boletim->setCodAluno(1);
+        $boletim->setCodAluno($_GET['codAluno']);
         $dadosAluno = $boletim->getDadosAluno();    
         $boletim->setCodTurma($dadosAluno[0]['turma_cod_turma']);
         $dadosTurma = $boletim->getDadosTurma($dadosAluno[0]['cod_matricula']);            
