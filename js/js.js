@@ -165,15 +165,21 @@ jQuery(function(){
     var status =  $(this).data('status');    
     if(status == 'Transferido'){
       alert("aluno transferido");
-    }else{      
+    }else{  
       var codMatricula = $this.data('id');
-      var codDisci = $("#turma").val();
-      var periodo = $(".tab-ativo").data('tipo');     
-      $("#id").val(id);
-      $("#codMatricula").val(codMatricula);
-      $(".modal").find('h2').text($('.tab-ativo').text());
-      $('.modal').addClass('modal-ativo');    
-      colocarNotasAjax(codDisci,periodo,codMatricula);
+      if($('#tipoUsu').val() == 'Professor'){
+        
+        var codDisci = $("#turma").val();
+        var periodo = $(".tab-ativo").data('tipo');     
+        $("#id").val(id);
+        $("#codMatricula").val(codMatricula);
+        $(".modal").find('h2').text($('.tab-ativo').text());
+        $('.modal').addClass('modal-ativo');    
+        colocarNotasAjax(codDisci,periodo,codMatricula);
+      }else{
+        location.href="boletim.php?codAluno="+ codMatricula;
+      }
+     
     }    
     return false;
   })
