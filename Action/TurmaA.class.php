@@ -12,6 +12,7 @@ class TurmaA extends TurmaM{
                                         INNER JOIN disciplina AS D ON (DR.cod_disciplina = D.cod_disciplina)
                                         INNER JOIN usuario AS U ON (DR.cod_usuario = U.cod_usuario)
                                         WHERE T.cod_turma = '%s'";
+    private $sqlSelectTurmas = "SELECT cod_turma, descricao_turma FROM Turma";
 
     public function getTipoPeriodoTurma(){ // verificar se é bimestre, trimestre ou semestre
         $sql = sprintf(
@@ -49,5 +50,9 @@ class TurmaA extends TurmaM{
             $this->getCodTurma()
         );
         return $this->runSelect($sql);
+    }
+
+    public function getTurmas(){
+        return $this->runSelect($this->sqlSelectTurmas);
     }
 }

@@ -9,7 +9,7 @@ class AtividadeA extends AtividadeM{
                                         AND numero_periodo = '%s'
                                         %s";      
 
-    public function getAtividadesAluno($codAluno, $numePeriodo){
+    public function getAtividadesAluno($codAluno, $numePeriodo){ // pegar dados das atividades relacionando com a matéria que o professor é responsável
         $sql = sprintf(
             $this->sqlSelectAtividades,
             " nome_atividade, peso_atividade, nota, cod_nota, A.cod_atividade ",

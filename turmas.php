@@ -3,13 +3,11 @@
     require_once(SITE_ROOT.DS.'autoload.php');
     use Core\Usuario;
     use Core\DisciplinaResponsavel;
+    use Core\Turma;
     use Classes\ValidarCampos;
     session_start();
     try{    
-        Usuario::verificarPermissoes(array('Professor'));  // apenas professores tem acesso a essa pagina   
-        $turmas = new DisciplinaResponsavel();
-        $turmas->setCodUsuario($_SESSION['id_user']);
-        $dadosTurma = $turmas->getTurmas();
+        Usuario::verificarPermissoes(array('Professor','Diretor'));  // apenas professores  e diretor têm acesso a essa pagina 
         $usuario = new Usuario();
         $dadosUsuario = $usuario->getDadosUser();        
 ?>   
@@ -47,32 +45,54 @@
                 <a href="logout.php">logout</a>
             </header>
             <section class="turmas">
+                <?php 
+                    if($_SESSION['tipo_usu'] == 'Professor'){
+                        $turmas = new DisciplinaResponsavel();
+                        $turmas->setCodUsuario($_SESSION['id_user']);
+                        $dadosTurma = $turmas->getTurmas();
+                ?>
                 <h1>Suas turmas</h1>
-                <div>
-                    <?php
-                        if(count($dadosTurma) > 0){
-                            $contador = 0;                            
-                            $html = "";
-                            $nomeDisciplina = array();
-                            $nomeDisciplina2 = "";
-                            while($contador < count($dadosTurma)){ 
-                                if(!in_array($dadosTurma[$contador]['descricao_disciplina'], $nomeDisciplina)){ 
-                                    if($contador == 0){
-                                        echo '<div>';
-                                        echo "<h3>{$dadosTurma[$contador]['descricao_disciplina']}</h3>";
-                                    }else{
-                                        echo '</div>';
-                                        echo "<h3>{$dadosTurma[$contador]['descricao_disciplina']}</h3>";
-                                        echo '<div>';
-                                    }                                    
-                                    $nomeDisciplina[] = $dadosTurma[$contador]['descricao_disciplina'];                                    
-                                }                                           
-                                echo '<a href="sala.php?ID='.$dadosTurma[$contador]['cod_turma'].'&CodDis='.$dadosTurma[$contador]['cod_turma_disciplina'].'">'.$dadosTurma[$contador]['descricao_turma'].'</a>';
-                                $contador++;                                
+                        <div>
+                            <?php
+                                if(count($dadosTurma) > 0){
+                                    $contador = 0;                            
+                                    $html = "";
+                                    $nomeDisciplina = array();
+                                    $nomeDisciplina2 = "";
+                                    while($contador < count($dadosTurma)){ 
+                                        if(!in_array($dadosTurma[$contador]['descricao_disciplina'], $nomeDisciplina)){ 
+                                            if($contador == 0){
+                                                echo '<div>';
+                                                echo "<h3>{$dadosTurma[$contador]['descricao_disciplina']}</h3>";
+                                            }else{
+                                                echo '</div>';
+                                                echo "<h3>{$dadosTurma[$contador]['descricao_disciplina']}</h3>";
+                                                echo '<div>';
+                                            }                                    
+                                            $nomeDisciplina[] = $dadosTurma[$contador]['descricao_disciplina'];                                    
+                                        }                                           
+                                        echo '<a href="sala.php?ID='.$dadosTurma[$contador]['cod_turma'].'&CodDis='.$dadosTurma[$contador]['cod_turma_disciplina'].'">'.$dadosTurma[$contador]['descricao_turma'].'</a>';
+                                        $contador++;                                
+                                    }
+                                }                       
+                            ?>     
+                        </div>
+                <?php
+                    }else{
+                        $turmas = new Turma();                        
+                        $dadosTurma = $turmas->getTurmas();                        
+                ?>
+                        <h1>Turmas do colégio</h1>
+                <?php
+                        echo '<div>';
+                            $contador=0;
+                            while($contador < count($dadosTurma)){
+                                echo '<a href="sala.php?ID='.$dadosTurma[$contador]['cod_turma'].'">'.$dadosTurma[$contador]['descricao_turma'].'</a>';
+                                $contador++;
                             }
-                        }                       
-                    ?>     
-                </div>
+                        echo '</div>';
+                    }
+                ?>
             </section>
         </div>
         
