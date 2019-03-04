@@ -97,7 +97,7 @@
                                             }                                            
                                         }else if($dadosMatriculas[$contador]['notas'][$contador2][0]['media'] < 6){
                                             $nota = number_format($dadosMatriculas[$contador]['notas'][$contador2][0]['media'], 2, '.', '');                                           
-                                            echo "<td><p style='color:red'>{$nota}</p></td>";
+                                            echo "<td style='background-color:red'><p>{$nota}</p></td>";
                                         }else{
                                             $nota = number_format($dadosMatriculas[$contador]['notas'][$contador2][0]['media'], 2, '.', '');  
                                             echo "<td><p>{$nota}</p></td>";

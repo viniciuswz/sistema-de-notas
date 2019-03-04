@@ -23,7 +23,7 @@ jQuery(function(){
     if($media < 6){
       $("#media").css("color", 'red');
       $("#media").text($media);  
-    }else if($media > 6){
+    }else if($media >= 6){
       $("#media").css("color", 'blue');
       $("#media").text($media);  
     }else{
@@ -72,7 +72,11 @@ function calcular(nota1,nota2,nota3,nota4){
 }
 
 function colocarMediaNaTable(id,tipo,calc){
-  $("tr[data-id="+id+"] td:nth-child("+(2 + tipo)+")").text(calc)
+  $("tr[data-id="+id+"] td:nth-child("+(2 + tipo)+")").text(calc);
+  if(calc < 6){
+    return $("tr[data-id="+id+"] td:nth-child("+(2 + tipo)+")").css('background-color','red')
+  }
+  $("tr[data-id="+id+"] td:nth-child("+(2 + tipo)+")").css('background-color','');
 }
 
 function addValorNotas(nota1,nota2,nota3,nota4){
@@ -134,9 +138,10 @@ function lancaNotaAjax(nota1,nota2,nota3,nota4,tipo,id){
       '&notas=' + notas,     
       success:function(result){
         if(result == 1){
-          $('#lancar-nota input').css('border', '5px solid #006400');
+          alerta('Certo','Nota alterada');
           //location.reload();
-          //alert("alterado")
+          //alert("alterado");
+          colocarMediaNaTable(codMatricula,periodo,numeroFloat(calcular.apply(calcular,pegarValForm()),2))
         }else{
           alert("erro")
         }       
@@ -152,7 +157,7 @@ function lancaNotaAjax(nota1,nota2,nota3,nota4,tipo,id){
 jQuery(function(){
   $('.fundo-modal').click(function(){
     $('.modal').removeClass('modal-ativo');    
-    location.reload();
+    //location.reload();
   })
 
   $('table tbody tr').click(function(){
@@ -187,5 +192,33 @@ jQuery(function(){
     $('.tabs a').addClass('bi')
   }
 
+
+  
 })
 
+function alerta(tipo, mensagem){
+
+
+  if(tipo == 'Errado'){
+  var bola ='bola bolaErro';
+  
+  }else if(tipo=='Certo'){
+    var bola ='bola';
+  }
+  
+  var estruturaDeAlerta = '<div class="alerta deu'+tipo+'">\
+  <div class="'+bola+'">\
+      <span class="'+tipo+'"></span>\
+  </div>\
+  <p>'+mensagem+'</p>\
+  </div>'
+  
+  // return estruturaDeAlerta
+  $('body').append(estruturaDeAlerta);
+  
+  }
+
+
+  function numeroFloat(num, casas) {
+      return num.toFixed(casas); 
+    }
