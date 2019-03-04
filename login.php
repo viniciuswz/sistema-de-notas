@@ -31,6 +31,7 @@
         <link rel=stylesheet media="screen and (min-width:1025px)" href="css/style1025.css">
         <!-- JS-->
         <script src="lib/_jquery/jquery.js"></script>
+        <script src="lib/_jquery/jquery.mask177.min.js"></script>
         <script src="js/js.js"></script>
         <script src="js/form.js"></script>
         

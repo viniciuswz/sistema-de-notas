@@ -41,7 +41,7 @@
     <body>
         <div id="container">
             <header>
-                <p>Olá, <strong><?php echo $dadosUsuario[0]['nome_usuario']?></strong> !</p>
+                <p>Olá,&nbsp;<strong><?php echo $dadosUsuario[0]['nome_usuario']?></strong> !</p>
                 <a href="logout.php">logout</a>
             </header>
             <section class="turmas">

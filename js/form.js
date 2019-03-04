@@ -63,4 +63,8 @@
         $(doc).removeClass('errado');
         doc.parentElement.firstElementChild.firstElementChild.innerHTML = mensagem.remove;
     }
+    $(document).ready(function(){
+        $("#cpf").mask("999.999.999-999");
+    });
+
  })()
