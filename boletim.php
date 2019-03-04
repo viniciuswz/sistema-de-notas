@@ -51,7 +51,7 @@
 <body>
     <div id="container">
         <header>
-            <p>Olá <strong><?php echo $dadosUsuario[0]['nome_usuario']?></strong>!</p>
+            <p><a onclick="window.history.go(-1);return false;">⇽</a>Olá,&nbsp;<strong><?php echo $dadosUsuario[0]['nome_usuario']?></strong>!</p>
             <a href="logout.php">logout</a>
         </header>
         <section class="boletim">

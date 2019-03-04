@@ -69,7 +69,7 @@
 <body>
     <div id="container">        
         <header>
-            <p>Olá, <strong><?php echo $dadosUsuario[0]['nome_usuario']?></strong> !</p>
+            <p><a href="turmas.php">⇽</a>Olá,&nbsp;<strong><?php echo $dadosUsuario[0]['nome_usuario']?></strong> !</p>
             <a href="logout.php">logout</a>
         </header>
         <section class="alunos">

@@ -105,17 +105,35 @@ header{
 
 
 header p{
-    margin-left: 20px
+    margin-left: 20px;
+    display: flex;
+    align-items: center
 }
 
-header a{
+header a:last-child{
     margin-right: 20px;
     color:black;
     background-color: white;
     padding: 10px 17px;
-    border-radius: 100%/700px
-    
+    border-radius: 100%/700px;
 }
+
+header a:first-child{
+
+    margin-right: 10px;
+    
+    color:white;
+    
+    font-weight:bold;
+    
+    font-size:34px;
+    
+    /* margin-bottom:4px; */
+    
+    position: relative;
+    
+    bottom: 3px;
+    }
 
 section.turmas{
     background-color: #8f2a54;
@@ -207,10 +225,9 @@ section.alunos p{
 
 .nota-table{
     width:9vw;
-   
 }
 
-tr:nth-child(even){
+.alunos table tr:nth-child(even){
     background-color: #bb3a70;
     width: 100%;
 }
@@ -231,16 +248,11 @@ tr:nth-child(even){
     white-space: nowrap;
     overflow: hidden;
     margin: 0 auto;
-    
-    
 }
 
 .alunos table tr td:last-child p{
-    
     font-size: 13px !important;
-    
     max-width: 90%
-    
 }
 
 .modal{
