@@ -7,6 +7,13 @@ if(!defined('ROOT')){
     define('ROOT',str_replace('/','\\',$_SERVER['DOCUMENT_ROOT']));
 }
 if(!defined('SITE_ROOT')){
-    define('SITE_ROOT',ROOT.DS.'FIEB-teste' .DIRECTORY_SEPARATOR. 'sistema-de-notas');
+    if(is_dir(ROOT.DS.'FIEB-teste' .DIRECTORY_SEPARATOR. 'sistema-de-notas')){        
+        define('SITE_ROOT',ROOT.DS.'FIEB-teste' .DIRECTORY_SEPARATOR. 'sistema-de-notas');
+    }else if(is_dir(ROOT.DS.'sistema-de-notas-Daniel')){        
+        define('SITE_ROOT',ROOT.DS.'sistema-de-notas-Daniel');
+    }else if(is_dir(ROOT.DS.'sistema-de-notas-Vinicius')){        
+        define('SITE_ROOT',ROOT.DS.'sistema-de-notas-Vinicius');
+    }
+    
 }
 
