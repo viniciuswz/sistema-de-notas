@@ -128,7 +128,7 @@
             <?php  }else{ ?>
 
                 <h1><?php echo $dadosMatriculas[0]['descricao_turma']?>, Sala <?php echo $dadosMatriculas[0]['sala_turma']?></h1>
-                    <p>Clique em um nome para lançar a nota</p>
+                    <p>Clique em um nome para gerar o boletim</p>
                     <table border="0" cellpading="0" cellspacing="0">
                         <thead>
                             

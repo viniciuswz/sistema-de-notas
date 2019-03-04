@@ -13,12 +13,7 @@ try{
     $usuario->setCpfUsu($_POST['cpf']);
     $usuario->setSenhaUsu($_POST['senha']);
     $usuario->logar();
-    
-    if($_SESSION['tipo_usu'] == 'Professor'){ // se for professor
-        echo "<script>javascript:window.location='turmas.php';</script>";
-    }else if($_SESSION['tipo_usu'] == 'Diretor'){
-        echo "<script>javascript:window.location='boletim.php';</script>";
-    }
+    echo 'login';    
 }catch (Exception $exc){
     $erro = $exc->getCode();
     switch ($erro) {
