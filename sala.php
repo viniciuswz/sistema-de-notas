@@ -143,7 +143,7 @@
                                 <?php
                                     $contador = 0;
                                     while($contador < count($dadosMatriculas)){
-                                        echo "<tr class='codMatricula' data-id={$dadosMatriculas[$contador]['cod_matricula']} data-status='{$dadosMatriculas[$contador]['status_matricula']}'>";
+                                        echo "<tr class='codMatricula' data-id={$dadosMatriculas[$contador]['aluno_cod_aluno']} data-status='{$dadosMatriculas[$contador]['status_matricula']}'>";
                                         echo "<td>{$dadosMatriculas[$contador]['numeroChamada']}</td>";
                                         echo "<td><p>{$dadosMatriculas[$contador]['nome_aluno']}</p></td>";
                                         echo "<td ><p>{$dadosMatriculas[$contador]['status_matricula']}</p></td>";                          
