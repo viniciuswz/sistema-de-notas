@@ -28,7 +28,7 @@ class NotasA extends NotasM{
                 $this->getCodMatricula(),
                 $contador,
                 $codigoDisciplina
-            );
+            );           
             $res = $this->runSelect($sql);
             if(empty($res[0]['media'])){
                 $notas[] = false;

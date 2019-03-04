@@ -33,9 +33,9 @@ class Boletim extends BoletimM{
         $contador = 0;
         $contador2 = 1;        
         while($contador < count($dados)){
-            $dados[$contador]['notas']= $this->pegarNotas($codMatricula, $dadosTurma[0]['num_perido'], $dados[$contador]['cod_disciplina']);           
+            $dados[$contador]['notas']= $this->pegarNotas($codMatricula, $dadosTurma[0]['num_perido'], $dados[$contador]['cod_turma_disciplina']);           
             $contador++;
-        }        
+        } 
         return $dados;
     }
 
