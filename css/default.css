@@ -426,6 +426,9 @@ padding-right:6px
 
 .boletim .materia div span{
    
+width: 100%;
+   
+text-align: center;
 }
 
 @keyframes aparecerDesaparecer{
@@ -496,7 +499,7 @@ padding-right:6px
 }
 
 .bola{
-    background-color: #09d261;
+    background-color: #07be56;
     margin-right: 10px;
     text-align: center;
     display: flex;
@@ -509,3 +512,4 @@ padding-right:6px
 .bolaErro{
     background-color: #ce0c08;
 }
+

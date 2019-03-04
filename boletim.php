@@ -68,12 +68,12 @@
                     <?php
                         $contador2 = 1;
                         while($contador2 <= $dadosTurma[0]['num_perido']){                                        
-                                echo '<span>'.$contador2.' '.$dadosTurma[0]['sigla_perido'].'</span>';                                       
+                                echo '<span style=font-weight:bold>'.$contador2.' '.$dadosTurma[0]['sigla_perido'].'</span>';                                       
                             $contador2++;
                         }
                     ?>     
                 </div>
-                <h3>Nome Professor</h3>
+                <h3 class="mobile-hidden">Professor</h3>
             </div>
 
             <?php
@@ -88,9 +88,9 @@
                          
                         while($contador2 < $dadosTurma[0]['num_perido']){
                             if($dadosTurma[1][$contador]['notas'][$contador2][0]['media'] == null){
-                                echo '<span style="color:red">0</span>';
+                                echo '<span style="background-color:red">0</span>';
                             }else if($dadosTurma[1][$contador]['notas'][$contador2][0]['media'] < 6){                          
-                                echo '<span style="color:red">' . number_format($dadosTurma[1][$contador]['notas'][$contador2][0]['media'], 2, '.', '') . '</span>';
+                                echo '<span style="background-color:red">' . number_format($dadosTurma[1][$contador]['notas'][$contador2][0]['media'], 2, '.', '') . '</span>';
                             }else{
                                 echo '<span>' . number_format($dadosTurma[1][$contador]['notas'][$contador2][0]['media'], 2, '.', '') . '</span>';
                             }                            
@@ -98,7 +98,7 @@
                         }
                         $contador2 = 0;
                 echo "</div>   
-                        <h3>{$dadosTurma[1][$contador]['nome_usuario']}</h3>
+                        <h3 class='mobile-hidden'>{$dadosTurma[1][$contador]['nome_usuario']}</h3>
                     </div>             
                 ";
                     $contador++;
