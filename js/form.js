@@ -2,9 +2,23 @@
     'use strict'
 
     var mensagem = {
-        'CPF': 'O CPF não foi digitado',
+        'cpf': 'O CPF não foi digitado',
         'senha': 'A senha não foi digitada',
-        'remove': ''
+        'remove': '',
+        'errocpf': 'CPF não cadastrado',
+        'errosenha': 'Senha errada'
+    }
+
+    var erroAjax = {
+        'CPF não cadastrado': function(){
+            redInput('#cpf','errocpf')
+        },
+        'Senha inválida': function(){
+            redInput('#senha','errosenha')
+        },
+        'login': function(){
+            location.href="turmas.php";
+        }
     }
     jQuery(function(){
         
@@ -21,16 +35,16 @@
                     okayInput.call(okayInput,$this); 
                 }    
                 if($this.value == '' && $this.type != 'submit'){
-                    redInput.call(redInput,$this);                    
+                    redInput.call(redInput,$this,$this.name);                    
                 }
             })
             if(okay){               
                 $.ajax({
-                    url: '../Logar.php',
+                    url: 'Logar.php',
                     type: 'post',
                     data: $('#login').serialize(),
                     success:function(result){
-                      
+                        erroAjax[result]();
                     }
                  });
             }
@@ -40,9 +54,9 @@
     })
     
 
-    function redInput(doc){
+    function redInput(doc,txt){
         $(doc).addClass('errado');
-        doc.parentElement.firstElementChild.firstElementChild.innerHTML = mensagem[doc.name];
+        $(doc).parent().find('span').text(mensagem[txt]);
     }
 
     function okayInput(doc){

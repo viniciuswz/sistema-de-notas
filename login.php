@@ -45,11 +45,11 @@
                     <form id='login' method="POST" action="Logar.php"> 
                             <h1>Login</h1>  
                         <div>
-                            <label for="cpf">CPF</label>
+                            <label for="cpf">CPF<span></span></label>
                             <input type="text" name="cpf" id="cpf" placeholder="Digite seu cpf">
                         </div>
                         <div>
-                            <label for="senha">Senha</label>
+                            <label for="senha">Senha<span></span></label>
                             <input type="password" name="senha" id="senha" placeholder="*********">
                         </div>
                         <input type="submit" value="Login">
